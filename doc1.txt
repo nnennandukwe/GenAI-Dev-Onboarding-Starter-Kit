@@ -1,0 +1,81 @@
+## Company Security and Compliance Guidelines
+
+**1. Introduction and Purpose**
+
+Welcome to [Company Name]! This document outlines the essential security and compliance guidelines that all employees, contractors, and third-party users (collectively referred to as "Users") must adhere to when accessing or using [Company Name]'s information systems, data, and physical premises. The purpose of these guidelines is to protect our company's assets, including sensitive information, intellectual property, and reputation, from various threats such as unauthorized access, disclosure, modification, destruction, or disruption. Compliance with these guidelines is mandatory and crucial for maintaining a secure and trustworthy environment for our business operations, customers, and partners. We encourage all users to read this document carefully and integrate these practices into their daily work routines. Regular training and updates will be provided to ensure everyone stays informed about the latest security best practices and any changes to these guidelines. Non-compliance may result in disciplinary action, up to and including termination of employment or contract, and legal action where applicable.
+
+**2. Data Security**
+
+Data is one of [Company Name]'s most valuable assets. Protecting its confidentiality, integrity, and availability is paramount.
+
+*   **Data Classification**: All company data must be classified based on its sensitivity (e.g., Public, Internal, Confidential, Highly Confidential). Users are responsible for understanding the classification of data they handle and applying appropriate protection measures. Highly Confidential data, such as customer financial information or unreleased product designs, requires the strictest controls.
+*   **Access Control**: Access to company data and systems is granted based on the principle of least privilege. This means users will only be given access to the information and resources necessary to perform their job duties. Access rights are reviewed regularly and revoked upon termination of employment or change in role. Sharing login credentials or granting unauthorized access to others is strictly prohibited.
+*   **Encryption**: Sensitive data must be encrypted both in transit (e.g., when sent over the internet or internal networks) and at rest (e.g., when stored on servers, laptops, or removable media). Approved encryption tools and protocols must be used. Consult the IT department for guidance on appropriate encryption methods.
+*   **Data Backup and Recovery**: Regular backups of critical company data are performed to prevent data loss in case of system failure, disaster, or cyber-attack. Users should store all work-related files on company-approved network drives or cloud storage solutions that are part of the backup schedule. Personal devices should not be used for storing primary copies of critical company data unless explicitly approved and secured according to company policy.
+
+**3. Network Security**
+
+Our network infrastructure is critical to our operations. Users must help protect it from unauthorized access and malicious activities.
+
+*   **Acceptable Use**: Company networks, including internet access, are provided for business purposes. Incidental personal use may be permitted but should not interfere with work responsibilities or consume excessive bandwidth. Accessing or distributing illegal, offensive, or malicious content is strictly prohibited.
+*   **Wi-Fi Security**: When connecting to the company's wireless network, ensure you are using the correct, secured network (e.g., WPA2/3-Enterprise). Avoid connecting to unsecured or public Wi-Fi networks for work purposes, especially when handling sensitive information. If remote access is required, use the company-provided VPN.
+*   **VPN Usage**: A Virtual Private Network (VPN) must be used when accessing company resources from outside the corporate network. This encrypts the connection and helps protect data from interception. The VPN should be activated before accessing any internal systems or sensitive data remotely.
+
+**4. Physical Security**
+
+Protecting our physical premises and assets is as important as digital security.
+
+*   **Office Access**: Employees must wear their identification badges visibly at all times within company premises. Visitors must be registered, escorted, and issued temporary badges. Do not allow tailgating (unauthorized individuals following an authorized person into a secure area). Report any suspicious individuals or activities to security personnel immediately.
+*   **Clean Desk Policy**: Maintain a clean and organized workspace. Sensitive documents should be stored securely in locked drawers or cabinets when not in use, especially overnight or when away from your desk. Computer screens should be locked (e.g., using Ctrl+Alt+Del or Win+L) when leaving your workstation unattended, even for short periods.
+
+**5. Password Policy**
+
+Strong passwords are a first line of defense against unauthorized access.
+
+*   **Complexity**: Passwords must meet minimum complexity requirements: at least 12 characters, including a mix of uppercase letters, lowercase letters, numbers, and special symbols. Avoid using easily guessable information like names, birthdays, or common words.
+*   **Uniqueness**: Use unique passwords for different company accounts. Do not reuse passwords across multiple systems or personal accounts.
+*   **Protection**: Do not write down passwords or share them with anyone, including IT staff. Use a company-approved password manager to store and manage your passwords securely.
+*   **Changes**: Change passwords immediately if you suspect they have been compromised. Regular password changes may be enforced by the system for critical accounts.
+
+**6. Software and Hardware Usage**
+
+Proper management of software and hardware helps prevent security vulnerabilities and ensures compliance.
+
+*   **Approved Software**: Only install software that has been approved by the IT department on company devices. Downloading or installing unauthorized software, especially from untrusted sources, can introduce malware and other security risks.
+*   **Software Updates**: Keep operating systems and all software applications, including web browsers and productivity tools, updated with the latest security patches. Enable automatic updates where possible, or follow IT department instructions for patching.
+*   **Hardware Management**: Company-issued hardware (laptops, mobile phones, etc.) must be handled responsibly and protected from loss, theft, or damage. Report any lost or stolen devices to the IT department and security immediately. Personal devices used for work (BYOD - Bring Your Own Device) must comply with company security policies and may require installation of security software.
+*   **Removable Media**: Use of removable media (USB drives, external hard drives) should be limited and approved by the IT department. All company data stored on removable media must be encrypted.
+
+**7. Incident Reporting**
+
+Prompt reporting of security incidents is crucial for minimizing damage and preventing future occurrences.
+
+*   **What to Report**: Report any suspected or confirmed security incidents, including but not limited to: malware infections, phishing attempts (successful or unsuccessful), unauthorized access to systems or data, lost or stolen devices, data breaches, or any unusual system behavior.
+*   **How to Report**: Immediately report incidents to your manager and the IT Help Desk or Security Operations Center (SOC) through the designated channels. Provide as much detail as possible about the incident.
+*   **Cooperation**: Cooperate fully with any investigation following a security incident.
+
+**8. Compliance**
+
+[Company Name] is committed to complying with all applicable laws, regulations, and contractual obligations related to data protection and security.
+
+*   **Relevant Regulations**: Depending on our business and the data we handle, this may include regulations such as the General Data Protection Regulation (GDPR), Health Insurance Portability and Accountability Act (HIPAA), Payment Card Industry Data Security Standard (PCI DSS), and others. Specific training will be provided for roles handling data covered by these regulations.
+*   **Data Privacy**: Respect the privacy of personal data belonging to customers, employees, and partners. Only collect, use, and store personal data for legitimate business purposes and with appropriate consent, as required by law and company policy.
+
+**9. Employee Responsibilities**
+
+Every user plays a vital role in maintaining our security posture.
+
+*   **Awareness**: Be aware of common security threats, such as phishing, social engineering, and malware. Participate in security awareness training programs.
+*   **Vigilance**: Exercise caution when opening email attachments, clicking on links, or sharing information. Verify requests for sensitive information, especially if they seem unusual or urgent.
+*   **Policy Adherence**: Adhere to all security policies and procedures outlined in this document and other company communications.
+*   **Reporting Concerns**: Report any security concerns or potential vulnerabilities to your manager or the IT department.
+
+**10. Policy Enforcement and Violations**
+
+Compliance with these Security and Compliance Guidelines is a condition of employment and access to [Company Name]'s resources. Violations of these guidelines may lead to disciplinary actions, which can range from warnings and retraining to suspension of access, termination of employment or contract, and, in cases of illegal activity, legal prosecution. [Company Name] reserves the right to monitor its systems and networks to ensure compliance with these policies and to investigate any suspected violations. All users are expected to cooperate with such monitoring and investigations.
+
+By accessing and using [Company Name]'s information systems and resources, you acknowledge that you have read, understood, and agree to comply with these Security and Compliance Guidelines.
+
+Last Updated: [Date]
+
+For questions or clarifications regarding these guidelines, please contact the IT Department or the Security Team.
