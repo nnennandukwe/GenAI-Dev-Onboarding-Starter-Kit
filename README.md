@@ -1,5 +1,16 @@
-```markdown
-# Project: RAG System with OpenAI and ChromaDB
+# 🚀 GenAI Developer Onboarding Starter Kit
+
+This repo is your all-in-one launchpad for onboarding engineering teams into the world of Generative AI.
+
+Whether you're starting to build internal assistants, integrating Retrieval-Augmented Generation (RAG) into your apps, or scaling GenAI use across departments — this starter kit gives you a hands-on, modular foundation that’s easy to clone, extend, and deploy.
+
+## 🧠 What's Inside
+
+- ✅ **Interactive RAG pipeline in Colab** using LangChain, OpenAI `gpt-4o` embeddings, and ChromaDB
+- 📝 **Markdown-based internal playbook** for async learning and fast ramp-up
+- 🧪 **LLM evaluation script** using [Ragas](https://github.com/explodinggradients/ragas) to measure **accuracy**, **completeness**, and **style**
+- 💬 **Prompt patterns and templates** to guide better assistant behavior
+- 🛠️ **Poetry for dependency management** — no environment headaches
 
 ## Overview
 This project demonstrates a simple Retrieval Augmented Generation (RAG) system. It uses OpenAI's `text-embedding-3-small` model to generate embeddings for text documents and stores them in a ChromaDB vector store. The system then uses these embeddings to retrieve relevant document chunks based on user queries and generate responses. The project also includes an evaluation component using the Ragas framework to assess the performance of the RAG pipeline, focusing on context precision, context recall, and faithfulness.
@@ -97,4 +108,3 @@ To run this project in Google Colaboratory:
 - Ensure you have a stable internet connection when running the scripts, as they interact with external APIs (OpenAI) and may download data.
 - The paths to documents and the ChromaDB database might need adjustment based on where you run the scripts.
 - This project is for demonstration purposes and may require further modifications for production use.
-```
