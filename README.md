@@ -87,22 +87,29 @@ To run the script:
 poetry run python evaluation.py
 ```
 
-## Using Google Colab
+## Using Google Colab (alternative)
 
-To run this project in Google Colaboratory:
+1.  Open the Colab notebook provided in the project.
+2.  Follow the instructions within the notebook to run the RAG pipeline.
 
-1.  **Upload your files**: Upload `embedding_processor.py`, `evaluation.py`, and any necessary document files (e.g., `doc1.txt`, `doc2.txt`) to your Colab environment.
-2.  **Install dependencies**: In a Colab cell, run the following commands to install Poetry and project dependencies:
-    ```python
-    !curl -sSL https://install.python-poetry.org | python3 -
-    !poetry install
+### Running Locally
+1.  **Generate Embeddings**: Run the `embedding_processor.py` script to process documents, generate embeddings, and store them in ChromaDB.
+    ```bash
+    poetry run python embedding_processor.py
     ```
-3.  **Set OpenAI API Key**: In a Colab cell, set your OpenAI API key as an environment variable:
-    ```python
-    import os
-    os.environ['OPENAI_API_KEY'] = 'your_api_key_here'
+2.  **Run Evaluation**: Run the `evaluation.py` script to evaluate the RAG system using Ragas.
+    ```bash
+    poetry run python evaluation.py
     ```
-4.  **Run the scripts**: Execute the `embedding_processor.py` and `evaluation.py` scripts as needed using `!poetry run python <script_name>.py`.
+
+## Project Structure
+```
+my_rag_project/
+├── pyproject.toml        # Poetry configuration file
+├── README.md             # This file
+├── embedding_processor.py # Script for generating and storing embeddings
+└── evaluation.py         # Script for evaluating the RAG system
+```
 
 ## Notes
 - Ensure you have a stable internet connection when running the scripts, as they interact with external APIs (OpenAI) and may download data.
