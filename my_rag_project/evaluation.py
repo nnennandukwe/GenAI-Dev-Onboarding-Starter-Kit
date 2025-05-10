@@ -1,6 +1,7 @@
 import os
-import chromadb
-from openai import OpenAI
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain_community.vectorstores import Chroma
+from langchain.chains import RetrievalQA
 from ragas import evaluate
 from ragas.metrics import (
     context_precision,
@@ -11,61 +12,71 @@ from datasets import Dataset
 
 # Define constants
 EMBEDDING_MODEL = "text-embedding-3-small"
-COLLECTION_NAME = "company_documents"
-CHROMA_DB_PATH = "../chroma_db"  # Relative to this script's location
+LLM_MODEL = "gpt-3.5-turbo" # Or gpt-4o, ensure it's available and suitable
+COLLECTION_NAME = "company_documents_langchain"
+CHROMA_DB_PATH = "../chroma_db_langchain"  # Path to the Langchain-populated DB
 
-# Placeholder for OpenAI API key retrieval
-def get_openai_client():
+def get_openai_api_key():
     api_key = os.environ.get("OPENAI_API_KEY")
     if not api_key:
         print("OPENAI_API_KEY environment variable not found. Please set it.")
         raise ValueError("OpenAI API key not found.")
-    return OpenAI(api_key=api_key)
-
-def get_embeddings(client, texts, model=EMBEDDING_MODEL):
-    response = client.embeddings.create(input=texts, model=model)
-    return [item.embedding for item in response.data]
-
-def retrieve_contexts(client, collection, question, n_results=3):
-    """Retrieves contexts from ChromaDB for a given question."""
-    query_embedding = get_embeddings(client, [question])[0]
-    results = collection.query(
-        query_embeddings=[query_embedding],
-        n_results=n_results,
-        include=["documents"] # We need the document content for context
-    )
-    return results["documents"][0] if results["documents"] and results["documents"][0] else []
+    return api_key
 
 def main():
-    print("Starting RAGAS evaluation process...")
+    print("Starting Langchain-based RAGAS evaluation process...")
 
-    # Initialize OpenAI client
+    # Get OpenAI API key
     try:
-        openai_client = get_openai_client()
+        openai_api_key = get_openai_api_key()
     except ValueError as e:
-        print(f"Failed to initialize OpenAI client: {e}")
-        print("Please ensure your OPENAI_API_KEY is set as an environment variable.")
+        print(f"Failed to get OpenAI API key: {e}")
         return
 
-    # Initialize ChromaDB client and get collection
-    chroma_db_full_path = os.path.abspath(os.path.join(os.path.dirname(__file__), CHROMA_DB_PATH))
-    print(f"Connecting to ChromaDB at: {chroma_db_full_path}")
+    # Initialize OpenAI embeddings and LLM via Langchain
     try:
-        chroma_client = chromadb.PersistentClient(path=chroma_db_full_path)
-        collection = chroma_client.get_collection(name=COLLECTION_NAME)
-        print(f"Successfully connected to ChromaDB collection \'{COLLECTION_NAME}\'.")
-        if collection.count() == 0:
-            print("Warning: ChromaDB collection is empty. Run embedding_processor.py first.")
-            # return # Allow to proceed to show Ragas setup, though metrics will be poor.
+        embeddings = OpenAIEmbeddings(model=EMBEDDING_MODEL, openai_api_key=openai_api_key)
+        llm = ChatOpenAI(model_name=LLM_MODEL, openai_api_key=openai_api_key, temperature=0)
+        print(f"Initialized OpenAIEmbeddings with model: {EMBEDDING_MODEL}")
+        print(f"Initialized ChatOpenAI with model: {LLM_MODEL}")
     except Exception as e:
-        print(f"Error connecting to ChromaDB: {e}")
-        print("Ensure that embedding_processor.py has been run successfully and the DB path is correct.")
+        print(f"Error initializing Langchain OpenAI components: {e}")
         return
+
+    # Connect to existing ChromaDB vector store
+    chroma_db_full_path = os.path.abspath(os.path.join(os.path.dirname(__file__), CHROMA_DB_PATH))
+    print(f"Connecting to Chroma vector store at: {chroma_db_full_path}")
+    try:
+        vector_store = Chroma(
+            collection_name=COLLECTION_NAME,
+            embedding_function=embeddings, # Provide the embedding function used by the DB
+            persist_directory=chroma_db_full_path
+        )
+        print(f"Successfully connected to Chroma vector store") 
+        if vector_store._collection.count() == 0:
+            print("Warning: ChromaDB collection is empty. Run embedding_processor_langchain.py first.")
+            # return # Allow to proceed to show Ragas setup, though metrics will be poor.
+
+    except Exception as e:
+        print(f"Error connecting to Chroma vector store: {e}")
+        print("Ensure that embedding_processor_langchain.py has been run successfully.")
+        return
+
+    # Create a Langchain retriever
+    retriever = vector_store.as_retriever(search_kwargs={"k": 3}) # Retrieve top 3 chunks
+
+    # Create a Langchain RetrievalQA chain
+    qa_chain = RetrievalQA.from_chain_type(
+        llm=llm,
+        chain_type="stuff",  # "stuff" puts all retrieved docs into the context
+        retriever=retriever,
+        return_source_documents=True # Important for getting contexts for Ragas
+    )
+    print("Langchain RetrievalQA chain created.")
 
     # Define evaluation dataset (questions and ground truths)
-    # These should ideally be more extensive and cover various aspects of your documents.
     eval_questions = [
-        "What is the company's policy on password complexity?",
+        "What is the company\'s policy on password complexity?",
         "How should employees report a security incident?",
         "Does the company offer remote work options?",
         "How can I contact customer support?"
@@ -77,68 +88,62 @@ def main():
         ["Customer support can be reached by emailing [Support Email Address] or calling [Support Phone Number] during operating hours."]
     ]
 
-    retrieved_contexts_list = []
-    # For faithfulness, we need a generated "answer". We'll use concatenated contexts as a proxy.
     generated_answers_list = []
+    retrieved_contexts_list = []
 
-    print("Retrieving contexts for evaluation questions...")
+    print("Generating answers and retrieving contexts using Langchain QA chain...")
     for question in eval_questions:
-        contexts = retrieve_contexts(openai_client, collection, question, n_results=3)
-        retrieved_contexts_list.append(contexts)
-        # Simple proxy for a generated answer: concatenate retrieved contexts
-        generated_answers_list.append("\n".join(contexts) if contexts else "No context retrieved.")
-        print(f"Q: {question}\nRetrieved contexts: {len(contexts)}")
+        try:
+            response = qa_chain.invoke({"query": question})
+            answer = response.get("result", "Failed to generate answer.")
+            source_documents = response.get("source_documents", [])
+            contexts = [doc.page_content for doc in source_documents]
+            
+            generated_answers_list.append(answer)
+            retrieved_contexts_list.append(contexts)
+            print(f"Q: {question}\nA: {answer}\nRetrieved contexts: {len(contexts)}")
+        except Exception as e:
+            print(f"Error during QA chain invocation for question 
+            generated_answers_list.append("Error in generation.")
+            retrieved_contexts_list.append([])
 
     # Prepare data for Ragas evaluation
-    # Ragas expects a Hugging Face Dataset object
     data = {
         "question": eval_questions,
         "contexts": retrieved_contexts_list,
-        "ground_truth": eval_ground_truths, # Ragas expects 'ground_truth' for context_recall, context_precision
-        "answer": generated_answers_list # Ragas expects 'answer' for faithfulness
+        "ground_truth": eval_ground_truths,
+        "answer": generated_answers_list
     }
     dataset = Dataset.from_dict(data)
 
     print("Running Ragas evaluation...")
-    # Define metrics
-    # Note: Some Ragas metrics might make calls to an LLM (even for evaluation purposes) 
-    # which would use the OpenAI API key configured in Ragas internals if not overridden.
-    # Faithfulness, for example, often uses an LLM to check consistency.
     metrics_to_evaluate = [
-        context_precision,  # Requires question, ground_truth, contexts
-        context_recall,     # Requires ground_truth, contexts
-        faithfulness,       # Requires answer, contexts
+        context_precision, 
+        context_recall,    
+        faithfulness,      
     ]
-    
-    # Ensure Ragas uses the specified OpenAI model for its internal LLM calls if any
-    # This is a bit indirect; Ragas might use its own defaults or require specific configuration
-    # for the LLM it uses for certain metrics. For now, we rely on environment variable for OpenAI.
+
+    # Ragas uses OpenAI models by default for some metrics if not configured otherwise.
+    # Ensure OPENAI_API_KEY is available in the environment for Ragas.
+    # For more control, you can configure Ragas llms and embeddings:
     # from ragas.llms import LangchainLLMWrapper
-    # from langchain_openai import ChatOpenAI
-    # ragas_llm = LangchainLLMWrapper(ChatOpenAI(model_name="gpt-3.5-turbo")) # Or gpt-4o if preferred
-    # faithfulness.llm = ragas_llm # Example of setting LLM for a specific metric
+    # from ragas.embeddings import LangchainEmbeddings
+    # ragas_llm = LangchainLLMWrapper(llm) # Use the same LLM as your QA chain
+    # ragas_embeddings = LangchainEmbeddings(embeddings) # Use the same embeddings
 
     try:
         result = evaluate(
             dataset,
             metrics=metrics_to_evaluate,
-            # llm=ragas_llm, # Optionally provide a specific LLM for Ragas evaluations
-            # embeddings= # Optionally provide specific embeddings if needed by a metric
+            # llm=ragas_llm, # if you configured ragas_llm
+            # embeddings=ragas_embeddings # if you configured ragas_embeddings
         )
-        print("Ragas Evaluation Results:")
+        print("Ragas Evaluation Results (Langchain pipeline):")
         print(result)
-
-        # You can also access individual scores:
-        # print(f"Context Precision: {result['context_precision']}")
-        # print(f"Context Recall: {result['context_recall']}")
-        # print(f"Faithfulness: {result['faithfulness']}")
-
     except Exception as e:
         print(f"Error during Ragas evaluation: {e}")
-        print("This might be due to API key issues, empty contexts, or Ragas internal errors.")
-        print("Ensure your OPENAI_API_KEY is valid and has sufficient quota.")
 
-    print("RAGAS evaluation process completed.")
+    print("Langchain-based RAGAS evaluation process completed.")
 
 if __name__ == "__main__":
     main()
