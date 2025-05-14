@@ -4,6 +4,8 @@ This repo is your all-in-one launchpad for onboarding engineering teams into the
 
 Whether you're starting to build internal assistants, integrating Retrieval-Augmented Generation (RAG) into your apps, or scaling GenAI use across departments — this starter kit gives you a hands-on, modular foundation that’s easy to clone, extend, and deploy.
 
+[Hands-On Google Colab Notebook](https://colab.research.google.com/github/nnennandukwe/GenAI-Dev-Onboarding-Starter-Kit/blob/main/GenAI_Dev_Onboarding_Starter_Kit.ipynb)
+
 ## 🧠 What's Inside
 
 - ✅ **Interactive RAG pipeline in Colab** using LangChain, OpenAI `gpt-4o` embeddings, and ChromaDB
@@ -21,6 +23,9 @@ This project demonstrates a simple Retrieval Augmented Generation (RAG) system. 
 - To demonstrate the integration of ChromaDB as a vector store.
 - To illustrate how to evaluate a RAG system using Ragas.
 - To offer a clear and reproducible setup for others to experiment with RAG systems.
+
+## Get Started with Google Colab workshop
+- Go to the [Gen AI Dev Starter Kit Colab](GenAI_Dev_Onboarding_Starter_Kit.ipynb) file to run the code and start building a RAG system!
 
 ## Project Structure
 ```
