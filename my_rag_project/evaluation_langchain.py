@@ -82,10 +82,10 @@ def main():
         "How can I contact customer support?"
     ]
     eval_ground_truths = [
-        ["Passwords must be at least 12 characters long and include a mix of uppercase letters, lowercase letters, numbers, and special symbols. Users should avoid easily guessable information."],
-        ["Employees should immediately report security incidents to their manager and the IT Help Desk or Security Operations Center (SOC) through designated channels, providing as much detail as possible."],
-        ["Yes, the company offers remote work options for many positions. Specifics should be checked in the job description or discussed with the hiring manager."],
-        ["Customer support can be reached by emailing [Support Email Address] or calling [Support Phone Number] during operating hours."]
+        "Passwords must be at least 12 characters long and include a mix of uppercase letters, lowercase letters, numbers, and special symbols. Users should avoid easily guessable information.",
+        "Employees should immediately report security incidents to their manager and the IT Help Desk or Security Operations Center (SOC) through designated channels, providing as much detail as possible.",
+        "Yes, the company offers remote work options for many positions. Specifics should be checked in the job description or discussed with the hiring manager.",
+        "Customer support can be reached by emailing [Support Email Address] or calling [Support Phone Number] during operating hours."
     ]
 
     generated_answers_list = []
@@ -103,7 +103,7 @@ def main():
             retrieved_contexts_list.append(contexts)
             print(f"Q: {question}\nA: {answer}\nRetrieved contexts: {len(contexts)}")
         except Exception as e:
-            print(f"Error during QA chain invocation for question 
+            print(f"Error during QA chain invocation for question") 
             generated_answers_list.append("Error in generation.")
             retrieved_contexts_list.append([])
 
