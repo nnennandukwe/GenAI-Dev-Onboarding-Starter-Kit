@@ -8,7 +8,7 @@ from langchain_community.vectorstores import Chroma
 EMBEDDING_MODEL = "text-embedding-3-small"
 COLLECTION_NAME = "company_documents_langchain"
 CHROMA_DB_PATH = "../chroma_db_langchain"  # New path for Langchain version
-DOC_DIR = ".."  # Relative to this script's location, pointing to the project root
+DOC_DIR = "."  # Relative to this script's location, pointing to the project root
 
 def get_openai_api_key():
     api_key = os.environ.get("OPENAI_API_KEY")
