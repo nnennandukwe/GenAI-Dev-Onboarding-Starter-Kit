@@ -15,7 +15,10 @@ Whether you're starting to build internal assistants, integrating Retrieval-Augm
 - 🛠️ **Poetry for dependency management** — no environment headaches
 
 ## Overview
-This project demonstrates a simple Retrieval Augmented Generation (RAG) system. It uses OpenAI's `text-embedding-3-small` model to generate embeddings for text documents and stores them in a ChromaDB vector store. The system then uses these embeddings to retrieve relevant document chunks based on user queries and generate responses. The project also includes an evaluation component using the Ragas framework to assess the performance of the RAG pipeline, focusing on context precision, context recall, and faithfulness.
+- This project demonstrates a simple Retrieval Augmented Generation (RAG) system (where an LLM can query stored documents as extra info to answer prompts)
+- It uses OpenAI's `text-embedding-3-small` model to generate embeddings for text documents and stores them in a ChromaDB vector store.
+- The system then uses these embeddings to retrieve relevant document chunks based on user queries and generate responses.
+- The project also includes an evaluation component using the Ragas framework to assess the performance of the RAG pipeline, focusing on context precision, context recall, and faithfulness.
 
 ## Intentions
 - To provide a practical example of building a RAG system.
@@ -24,26 +27,29 @@ This project demonstrates a simple Retrieval Augmented Generation (RAG) system. 
 - To illustrate how to evaluate a RAG system using Ragas.
 - To offer a clear and reproducible setup for others to experiment with RAG systems.
 
-## Get Started with Google Colab workshop
+## Get Started with Google Colab Project to run in the browser!
 - Go to the [Gen AI Dev Starter Kit Colab](GenAI_Dev_Onboarding_Starter_Kit.ipynb) file to run the code and start building a RAG system!
 
 ## Project Structure
 ```
-my_rag_project/
-├── embedding_processor.py  # Script for generating and storing embeddings
-├── evaluation_script.py    # Script for evaluating the RAG system (conceptual)
-├── requirements.txt        # List of Python packages required
-└── README.md               # This file
+GenAI-Dev-Onboarding-Starter-Kit/
+├──pyproject.toml                         # project dependencies managed by Poetry
+├──doc1.txt                               # Example document about "Security and Compliance" 
+├──doc2.txt                               # Example document about "Company FAQs"
+├──my_rag_project/
+    ├── embedding_processor_langchain.py  # Script for generating and storing embeddings
+    ├── evaluation_langchain.py           # Script for evaluating the RAG system
+└── README.md                             # This file!
 ```
 
-## Setup and Installation
+## Alternative: Local Setup and Installation 
 
 ### Prerequisites
 - Python 3.9 or higher
 - Poetry for dependency management
 - An OpenAI API key
 
-### 1. Clone the Repository (if applicable)
+### 1. Clone the Repository
 If you have cloned this project from a Git repository, navigate to the project directory.
 
 ### 2. Install Poetry
@@ -74,49 +80,31 @@ Alternatively, you can set it directly in your terminal session:
 export OPENAI_API_KEY='your_api_key_here'
 ```
 
-## Running the Project
+### 5. Running the Project
 
-### Step 1: Generate Embeddings
-The `embedding_processor.py` script is used to generate embeddings for your documents and store them in ChromaDB. Make sure your documents are in the correct location or update the script accordingly.
+#### Step 0: Navigate to `my_rag_project` directory
+
+```bash
+cd my_rag_project
+```
+
+#### Step 1: Generate Embeddings
+The `embedding_processor_langchain.py` script is used to generate embeddings for your documents and store them in ChromaDB. Make sure your documents are in the correct location or **update the script with the correct file path accordingly**!
 
 To run the script:
 ```bash
-poetry run python embedding_processor.py
+poetry run python embedding_processor_langchain.py
 ```
 
-### Step 2: Evaluate the RAG System
+#### Step 2: Evaluate the RAG System
 The `evaluation.py` script is used to evaluate the RAG system. It will use the embeddings generated in the previous step.
 
 To run the script:
 ```bash
-poetry run python evaluation.py
+poetry run python evaluation_langchain.py
 ```
 
-## Using Google Colab (alternative)
-
-1.  Open the Colab notebook provided in the project.
-2.  Follow the instructions within the notebook to run the RAG pipeline.
-
-### Running Locally
-1.  **Generate Embeddings**: Run the `embedding_processor.py` script to process documents, generate embeddings, and store them in ChromaDB.
-    ```bash
-    poetry run python embedding_processor.py
-    ```
-2.  **Run Evaluation**: Run the `evaluation.py` script to evaluate the RAG system using Ragas.
-    ```bash
-    poetry run python evaluation.py
-    ```
-
-## Project Structure
-```
-my_rag_project/
-├── pyproject.toml        # Poetry configuration file
-├── README.md             # This file
-├── embedding_processor.py # Script for generating and storing embeddings
-└── evaluation.py         # Script for evaluating the RAG system
-```
-
-## Notes
+## Troubleshooting & Notes
 - Ensure you have a stable internet connection when running the scripts, as they interact with external APIs (OpenAI) and may download data.
 - The paths to documents and the ChromaDB database might need adjustment based on where you run the scripts.
 - This project is for demonstration purposes and may require further modifications for production use.
