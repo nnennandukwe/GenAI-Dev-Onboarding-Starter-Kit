@@ -6,7 +6,7 @@ Whether you're starting to build internal assistants, integrating Retrieval-Augm
 
 💻 [Start the Hands-On Colab Notebook!](https://colab.research.google.com/github/nnennandukwe/GenAI-Dev-Onboarding-Starter-Kit/blob/main/GenAI_Dev_Onboarding_Starter_Kit.ipynb?utm_source=github&utm_medium=social&utm_campaign=genai_starter_kit_launch)
 
-🗒️ [Fill out this 30-second Feedback Form](https://forms.gle/ztmLsjmUZUtzRQ479?utm_source=colab&utm_medium=notebook&utm_campaign=genai_starter_kit_feedback
+🗒️ [Fill out this 30-second Survey](https://forms.gle/ztmLsjmUZUtzRQ479?utm_source=colab&utm_medium=notebook&utm_campaign=genai_starter_kit_feedback
 )
 
 ## 🧠 What's Inside
