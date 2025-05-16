@@ -4,7 +4,7 @@ This repo is your all-in-one launchpad for onboarding engineering teams into the
 
 Whether you're starting to build internal assistants, integrating Retrieval-Augmented Generation (RAG) into your apps, or scaling GenAI use across departments — this starter kit gives you a hands-on, modular foundation that’s easy to clone, extend, and deploy.
 
-[Hands-On Google Colab Notebook](https://colab.research.google.com/github/nnennandukwe/GenAI-Dev-Onboarding-Starter-Kit/blob/main/GenAI_Dev_Onboarding_Starter_Kit.ipynb)
+[Hands-On Google Colab Notebook](https://colab.research.google.com/github/nnennandukwe/GenAI-Dev-Onboarding-Starter-Kit/blob/main/GenAI_Dev_Onboarding_Starter_Kit.ipynb?utm_source=github&utm_medium=social&utm_campaign=genai_starter_kit_launch)
 
 ## 🧠 What's Inside
 
