@@ -9,6 +9,10 @@ Whether you're starting to build internal assistants, integrating Retrieval-Augm
 🗒️ [Fill out this 30-second Survey](https://forms.gle/ztmLsjmUZUtzRQ479?utm_source=colab&utm_medium=notebook&utm_campaign=genai_starter_kit_feedback
 )
 
+## Need an Intro to RAG?
+
+If you'd like a quick intro lab before getting started, go to the [Intro to RAG and Tools](00_intro_to_rag_and_tools.md) lab.
+
 ## 🧠 What's Inside
 
 - ✅ **Interactive RAG pipeline in Colab** using LangChain, OpenAI `gpt-4o` embeddings, and ChromaDB
@@ -22,10 +26,6 @@ Whether you're starting to build internal assistants, integrating Retrieval-Augm
 - It uses OpenAI's `text-embedding-3-small` model to generate embeddings for text documents and stores them in a ChromaDB vector store.
 - The system then uses these embeddings to retrieve relevant document chunks based on user queries and generate responses.
 - The project also includes an evaluation component using the Ragas framework to assess the performance of the RAG pipeline, focusing on context precision, context recall, and faithfulness.
-
-## Need an Intro to RAG?
-
-If you'd like a quick intro lab before getting started, go to the [Intro to RAG and Tools](00_intro_to_rag_and_tools.md) lab.
 
 ## Intentions
 - To provide a practical example of building a RAG system.
