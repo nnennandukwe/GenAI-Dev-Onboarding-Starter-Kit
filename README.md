@@ -23,6 +23,10 @@ Whether you're starting to build internal assistants, integrating Retrieval-Augm
 - The system then uses these embeddings to retrieve relevant document chunks based on user queries and generate responses.
 - The project also includes an evaluation component using the Ragas framework to assess the performance of the RAG pipeline, focusing on context precision, context recall, and faithfulness.
 
+## Need an Intro to RAG?
+
+If you'd like a quick intro lab before getting started, go to the [Intro to RAG and Tools](00_intro_to_rag_and_tools.md) lab.
+
 ## Intentions
 - To provide a practical example of building a RAG system.
 - To showcase the use of OpenAI embeddings for text processing.
